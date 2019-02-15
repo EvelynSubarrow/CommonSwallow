@@ -53,7 +53,7 @@ def get_departure_board(location, datetime_from, duration):
             (ta.movement_type='A' AND flat_schedules.iid=ta.flat_schedule_iid AND arrival_scheduled=ta.datetime_scheduled)
             LEFT JOIN trust_movements as td ON
             (td.movement_type='D' AND flat_schedules.iid=td.flat_schedule_iid AND (departure_scheduled=td.datetime_scheduled OR pass_scheduled=td.datetime_scheduled))
-            WHERE flat_timing.location_iid in (select iid from locations where %s in (crs, tiploc, stanox))
+            WHERE flat_timing.location_iid in (select iid from locations where %s in (crs, tiploc))
             AND departure_scheduled BETWEEN %s AND %s ORDER BY departure_scheduled;
             """, [location, timestamp, timestamp+60*duration])
 
